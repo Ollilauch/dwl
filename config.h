@@ -50,6 +50,7 @@ static const MonitorRule monrules[] = {
     */
     /* defaults */
     { NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+    { "eDP-1",      0.55f, 1,      1.6f,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 };
 
 /* keyboard */
@@ -58,8 +59,8 @@ static const struct xkb_rule_names xkb_rules = {
     /* example:
     .options = "ctrl:nocaps",
     */
-    .options = NULL,
     .layout = "de",
+    .options = NULL,
 };
 
 static const int repeat_rate = 25;
@@ -131,6 +132,8 @@ static const Key keys[] = {
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
     { MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
     { MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
+    { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,      {.i = +1} },
+    { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          movestack,      {.i = -1} },
     { MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
     { MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
     { MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },

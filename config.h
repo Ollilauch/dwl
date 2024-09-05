@@ -9,7 +9,7 @@ static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
 static const float rootcolor[]             = COLOR(0x222222ff);
 static const float bordercolor[]           = COLOR(0x444444ff);
-static const float focuscolor[]            = COLOR(0x005577ff);
+static const float focuscolor[]            = COLOR(0x6E56AFff);
 static const float urgentcolor[]           = COLOR(0xff0000ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
@@ -50,7 +50,7 @@ static const MonitorRule monrules[] = {
     */
     /* defaults */
     { "eDP-1",     0.5f, 1,      1.5f,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
-    { NULL,       0.55f, 1,      1.5f,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+    { NULL,        0.5f, 1,      1.5f,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 };
 
 /* keyboard */
@@ -119,11 +119,25 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_SHIFT,SKEY,toggletag, {.ui = 1 << TAG} }
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/zsh", "-c", cmd, NULL } }
 
 /* commands */
 static const char *termcmd[] = { "alacritty", NULL };
 static const char *menucmd[] = { "wmenu-run", NULL };
+
+/* brightness */
+static const char *brightness_up[] = {"dwm-brightness", "up", NULL};
+static const char *brightness_down[] = {"dwm-brightness", "down", NULL};
+
+/* volume */
+static const char *upvol[] = {"dwm-volume", "up", NULL};
+static const char *downvol[] = {"dwm-volume", "down", NULL};
+static const char *mutevol[] = {"dwm-volume", "toggle", NULL};
+static const char *umutevol[] = {"dwm-volume", "umute", NULL};
+static const char *mutemic[] = {"dwm-volume", "mic toggle", NULL};
+
+/* screenshot */
+static const char *screenshot[] = {"flameshot", "gui", NULL};
 
 static const Key keys[] = {
     /* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -166,6 +180,17 @@ static const Key keys[] = {
     TAGKEYS(          XKB_KEY_8, XKB_KEY_parenleft,                   7),
     TAGKEYS(          XKB_KEY_9, XKB_KEY_parenright,                  8),
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Delete,          quit,           {0} },
+
+    // Function Keys
+    {0,                          XKB_KEY_XF86MonBrightnessUp,   spawn, {.v = brightness_up}},
+    {0,                          XKB_KEY_XF86MonBrightnessDown, spawn, {.v = brightness_down}},
+    {0,                          XKB_KEY_XF86AudioLowerVolume,  spawn, {.v = downvol}},
+    {0,                          XKB_KEY_XF86AudioLowerVolume,  spawn, {.v = umutevol}},
+    {0,                          XKB_KEY_XF86AudioMute,         spawn, {.v = mutevol}},
+    {0,                          XKB_KEY_XF86AudioRaiseVolume,  spawn, {.v = upvol}},
+    {0,                          XKB_KEY_XF86AudioRaiseVolume,  spawn, {.v = umutevol}},
+    {0,                          XKB_KEY_XF86AudioMicMute,      spawn, {.v = mutemic}},
+    {0,                          XKB_KEY_Print,                 spawn, {.v = screenshot}},
 
     /* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
     { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },

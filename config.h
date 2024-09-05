@@ -119,7 +119,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_SHIFT,SKEY,toggletag, {.ui = 1 << TAG} }
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/zsh", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static const char *termcmd[] = { "alacritty", NULL };
@@ -137,7 +137,7 @@ static const char *umutevol[] = {"dwm-volume", "umute", NULL};
 static const char *mutemic[] = {"dwm-volume", "mic toggle", NULL};
 
 /* screenshot */
-static const char *screenshot[] = {"flameshot", "gui", NULL};
+static const char *screenshot[] = {"dwl-screenshot", NULL};
 
 static const Key keys[] = {
     /* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */

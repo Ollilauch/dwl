@@ -14,7 +14,7 @@ static const float urgentcolor[]           = COLOR(0xff0000ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
 static const int respect_monitor_reserved_area = 0;  /* 1 to monitor center while respecting the monitor's reserved area, 0 to monitor center */
-static const char *cursor_theme            = NULL;
+static const char *cursor_theme            = "macOS";
 static const char cursor_size[]            = "24"; /* Make sure it's a valid integer, otherwise things will break */
 
 /* tagging - TAGCOUNT must be no greater than 31 */
@@ -126,6 +126,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "alacritty", NULL };
 static const char *menucmd[] = { "wmenu-run", NULL };
+static const char *webbrowser[] = { "chromium", NULL };
 
 /* brightness */
 static const char *brightness_up[] = {"dwm-brightness", "up", NULL};
@@ -146,6 +147,7 @@ static const Key keys[] = {
     /* modifier                  key                 function        argument */
     { MODKEY,                    XKB_KEY_d,          spawn,          {.v = menucmd} },
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
+    { MODKEY,                    XKB_KEY_Return,     spawn,          {.v = webbrowser} },
     { MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
     { MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
     { MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },

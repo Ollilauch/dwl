@@ -1,0 +1,13 @@
+dwl
+*.o
+.ccls-cache
+*.rej
+*.orig
+.ccls-cache/
+
+# Do not ignore
+# !config.h
+# !config.def.h
+# !dwl.c
+# !Makefile
+# !patches
